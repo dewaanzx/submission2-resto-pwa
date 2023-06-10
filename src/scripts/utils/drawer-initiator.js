@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const DrawerInitiator = {
   init({ button, drawer, content }) {
     button.addEventListener('click', (event) => {

@@ -1,32 +1,32 @@
 import UrlParser from '../../routes/url-parser';
-import TheRestoDbSource from '../../data/restodb-source';
-import { createRestoDetailTemplate } from '../templates/template-creator';
+import TheSvargaDbSource from '../../data/svargadb-source';
+import { createSvargaDetailTemplate } from '../templates/template-creator';
 import LikeButtonInitiator from '../../utils/like-button-initiator';
 
 const Detail = {
   async render() {
     return `
-      <div id="resto" class="resto"></div>
+      <div id="svarga" class="svarga"></div>
       <div id="likeButtonContainer"></div>
     `;
   },
 
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const resto = await TheRestoDbSource.detailResto(url.id);
-    const restoContainer = document.querySelector('#resto');
+    const svarga = await TheSvargaDbSource.detailSvarga(url.id);
+    const svargaContainer = document.querySelector('#svarga');
 
-    restoContainer.innerHTML = createRestoDetailTemplate(resto);
+    svargaContainer.innerHTML = createSvargaDetailTemplate(svarga);
 
     LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      resto: {
-        id: resto.id,
-        name: resto.name,
-        description: resto.description,
-        rating: resto.rating,
-        pictureId: resto.pictureId,
-        city: resto.city,
+      svarga: {
+        id: svarga.id,
+        name: svarga.name,
+        description: svarga.description,
+        rating: svarga.rating,
+        pictureId: svarga.pictureId,
+        city: svarga.city,
       },
     });
   },
