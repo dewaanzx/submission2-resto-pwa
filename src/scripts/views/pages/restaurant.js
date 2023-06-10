@@ -1,21 +1,21 @@
-import TheRestoDbSource from '../../data/restodb-source';
-import { createRestoItemTemplate } from '../templates/template-creator';
+import TheSvargaDbSource from '../../data/svargadb-source';
+import { createSvargaItemTemplate } from '../templates/template-creator';
 
 const Restaurant = {
   async render() {
     return `
     <div class="content">
-    <div id="restos" class="restos">
+    <div id="svargas" class="svargas">
     </div>
     </div>
     `;
   },
 
   async afterRender() {
-    const restaurant = await TheRestoDbSource.nowPlayingResto();
-    const restoContainer = document.querySelector('#restos');
-    restaurant.forEach((resto) => {
-      restoContainer.innerHTML += createRestoItemTemplate(resto);
+    const restaurant = await TheSvargaDbSource.nowPlayingSvarga();
+    const svargaContainer = document.querySelector('#svargas');
+    restaurant.forEach((svarga) => {
+      svargaContainer.innerHTML += createSvargaItemTemplate(svarga);
     });
   },
 };

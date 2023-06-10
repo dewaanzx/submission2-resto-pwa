@@ -1,34 +1,34 @@
-import FavoriteRestoIdb from '../data/favorite-resto-idb';
+import FavoriteSvargaIdb from '../data/favorite-svarga-idb';
 import { createLikeButtonTemplate, createLikedButtonTemplate } from '../views/templates/template-creator';
 
 const LikeButtonInitiator = {
-  async init({ likeButtonContainer, resto }) {
+  async init({ likeButtonContainer, svarga }) {
     this._likeButtonContainer = likeButtonContainer;
-    this._resto = resto;
+    this._svarga = svarga;
 
     await this._renderButton();
   },
 
   async _renderButton() {
-    const { id } = this._resto;
+    const { id } = this._svarga;
 
-    if (await this._isRestoExist(id)) {
+    if (await this._isSvargaExist(id)) {
       this._renderLiked();
     } else {
       this._renderLike();
     }
   },
 
-  async _isRestoExist(id) {
-    const resto = await FavoriteRestoIdb.getResto(id);
-    return !!resto;
+  async _isSvargaExist(id) {
+    const svarga = await FavoriteSvargaIdb.getSvarga(id);
+    return !!svarga;
   },
 
   _renderLike() {
     this._likeButtonContainer.innerHTML = createLikeButtonTemplate();
     const likeButton = document.querySelector('#likeButton');
     likeButton.addEventListener('click', async () => {
-      await FavoriteRestoIdb.putResto(this._resto);
+      await FavoriteSvargaIdb.putSvarga(this._svarga);
       this._renderButton();
     });
   },
@@ -38,7 +38,7 @@ const LikeButtonInitiator = {
 
     const likeButton = document.querySelector('#likeButton');
     likeButton.addEventListener('click', async () => {
-      await FavoriteRestoIdb.deleteResto(this._resto.id);
+      await FavoriteSvargaIdb.deleteSvarga(this._svarga.id);
       this._renderButton();
     });
   },
